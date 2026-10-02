@@ -429,3 +429,37 @@ const antiDiagonalTraversal = (matrxi: number[][]) => {
 }
 
 console.log(antiDiagonalTraversal(matrix))
+
+// 8.) Intervals
+// Problem = Given a collection of intervals, merge all overlapping intervals.
+
+// Explanation of how this problem is solved:
+// So in this problem, the main idea is to create a new array of arrays called result. What we do, is that whenever we find an interval that is okay and doest overlap with its preceding interval, we append (push) that interval to result. When starting, we use the first value (an array) of our matrix/ intervals array of arrays as the first value of the new result array of arrays so that the incoming arrays build upon it as we push them there. If we find that the second array overlaps the first array, we replace the second value of the first array in result with the second value of the current array in matrix...
+
+const intervals = [
+  [1, 3],
+  [2, 6],
+  [8, 10],
+  [15, 18],
+]
+
+const mergeIntervals = (matrix: number[][]): number[][] => {
+  if (matrix.length === 0) return []
+
+  matrix.sort((a, b) => a[0] - b[0])
+
+  const result: number[][] = [matrix[0]]
+
+  for (let i = 1; i < matrix.length; i++) {
+    const current = matrix[i]
+    let last = result[result.length - 1]
+
+    if (current[0] < last[1]) {
+      last[1] = Math.max(last[1], current[1])
+    } else {
+      result.push(current)
+    }
+  }
+  return result
+}
+console.log(mergeIntervals(intervals))
