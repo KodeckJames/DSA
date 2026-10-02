@@ -138,7 +138,6 @@ const isPalindrome = (word: string): boolean => {
 console.log(isPalindrome('racecar'))
 
 // Remove duplicates from a sorted array
-// Link: https://chatgpt.com/share/6abbe049-65e4-83e9-9e9c-9c67a9b53fec
 
 const removeDuplicates = (nums: number[]): number => {
   if (nums.length === 0) return 0
