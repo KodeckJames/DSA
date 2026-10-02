@@ -436,6 +436,27 @@ console.log(antiDiagonalTraversal(matrix))
 // Explanation of how this problem is solved:
 // So in this problem, the main idea is to create a new array of arrays called result. What we do, is that whenever we find an interval that is okay and doest overlap with its preceding interval, we append (push) that interval to result. When starting, we use the first value (an array) of our matrix/ intervals array of arrays as the first value of the new result array of arrays so that the incoming arrays build upon it as we push them there. If we find that the second array overlaps the first array, we replace the second value of the first array in result with the second value of the current array in matrix...
 
+/*
+Complexity
+
+The scan itself is:
+
+O(n)
+
+But we have to sort first.
+
+JavaScript's sort() is generally considered:
+
+O(n log n)
+
+for interview complexity analysis.
+
+Therefore:
+
+Time
+O(n log n)
+*/
+
 const intervals = [
   [1, 3],
   [2, 6],
@@ -463,3 +484,56 @@ const mergeIntervals = (matrix: number[][]): number[][] => {
   return result
 }
 console.log(mergeIntervals(intervals))
+
+/*
+Meeting conflicts
+
+Another classic problem:
+
+Given meeting intervals, determine whether a person can attend all meetings.
+
+Example:
+
+[0,30]
+[5,10]
+[15,20]
+
+Clearly:
+
+0 ───────────────────── 30
+    5 ─── 10
+            15 ─── 20
+
+The first meeting overlaps the other meetings.
+
+So you can return:
+
+false
+
+The approach:
+
+Sort by start time.
+Compare each interval with the previous one.
+If:
+current.start < previous.end
+
+there is a conflict.
+*/
+
+const canAttendMeeting = (matrix: number[][]): boolean => {
+  matrix.sort((a, b) => a[0] - b[0])
+
+  for (let i = 1; i < matrix.length; i++) {
+    if (matrix[i][0] < matrix[i - 1][1]) {
+      return false
+    }
+  }
+  return true
+}
+console.log(
+  canAttendMeeting([
+    [0, 30],
+    [5, 10],
+    [15, 20],
+  ])
+)
