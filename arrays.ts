@@ -331,6 +331,7 @@ const matrix = [
   [9, 1, 6],
   [3, 8, 5],
 ]
+console.log(`Matrix Length = ${matrix.length}`)
 
 const findValueInMatrix = (nums: number[][], value: number): string => {
   for (let row = 0; row < nums.length; row++) {
@@ -366,3 +367,65 @@ console.log(
     [4, 5, 6],
   ])
 )
+
+// Column traversal
+const ColumnTraversal = (matrix: number[][]) => {
+  for (let col = 0; col < matrix[0].length; col++) {
+    for (let row = 0; row < matrix.length; row++) {
+      console.log([matrix[row], matrix[col]])
+    }
+  }
+}
+// ColumnTraversal(matrix)
+
+// Diagonal Traversal
+
+const diagonalTraversal = (matrix: number[][]) => {
+  let result = []
+  for (let i = 0; i < matrix.length; i++) {
+    result.push(matrix[i][i])
+  }
+
+  return result
+}
+console.log(diagonalTraversal(matrix))
+
+// Anti-diagonal Traversal
+/*
+For:
+
+1 2 3
+4 5 6
+7 8 9
+
+coordinates are:
+
+(0,2)
+(1,1)
+(2,0)
+
+Notice:
+
+row + col = n - 1
+
+For a 3 × 3 matrix:
+
+0 + 2 = 2
+1 + 1 = 2
+2 + 0 = 2
+
+So:
+ */
+
+const antiDiagonalTraversal = (matrxi: number[][]) => {
+  let n = matrix.length
+  let result = []
+
+  for (let row = 0; row < n; row++) {
+    let col = n - 1 - row
+    result.push(matrix[row][col])
+  }
+  return result
+}
+
+console.log(antiDiagonalTraversal(matrix))
