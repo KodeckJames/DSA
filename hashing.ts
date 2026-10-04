@@ -62,6 +62,9 @@ console.log(twoSumInt([2, 7, 11, 15], 26))
 Contains Duplicate
 
 Given an integer array, return true if any value appears at least twice.
+
+Time:  O(n)
+Space: O(n)
 */
 
 const containsDuplicate = (nums: number[]): boolean => {
@@ -76,3 +79,18 @@ const containsDuplicate = (nums: number[]): boolean => {
 }
 
 console.log(containsDuplicate([1, 2, 3, 1]))
+
+// Remove Duplicates
+
+const removeDuplicates = (nums: number[]): Set<number> => {
+  let set = new Set<number>()
+
+  for (const num of nums) {
+    set.add(num)
+  }
+  return set
+}
+console.log(removeDuplicates([1, 2, 2, 3, 3, 4]))
+
+// Shorter version:
+const removeDuplicatesShort = (nums: number[]): Set<number> => new Set(nums)
