@@ -44,16 +44,35 @@ console.log(twoSum([2, 7, 11, 15], 26))
 // Two Sum problem - Returning actual Integers
 
 const twoSumInt = (nums: number[], target: number): number[] => {
-  let map = new Map<number, number>()
+  let set = new Set<number>()
 
   for (const num of nums) {
     let complement = target - num
 
-    if (map.has(complement)) {
+    if (set.has(complement)) {
       return [complement, num]
     }
-    map.set(num, num)
+    set.add(num)
   }
   return []
 }
 console.log(twoSumInt([2, 7, 11, 15], 26))
+
+/*
+Contains Duplicate
+
+Given an integer array, return true if any value appears at least twice.
+*/
+
+const containsDuplicate = (nums: number[]): boolean => {
+  let set = new Set<number>()
+
+  for (const num of nums) {
+    if (set.has(num)) return true
+
+    set.add(num)
+  }
+  return false
+}
+
+console.log(containsDuplicate([1, 2, 3, 1]))
