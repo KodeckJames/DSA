@@ -40,3 +40,20 @@ const twoSum = (nums: number[], target: number): number[] => {
   return []
 }
 console.log(twoSum([2, 7, 11, 15], 26))
+
+// Two Sum problem - Returning actual Integers
+
+const twoSumInt = (nums: number[], target: number): number[] => {
+  let map = new Map<number, number>()
+
+  for (const num of nums) {
+    let complement = target - num
+
+    if (map.has(complement)) {
+      return [complement, num]
+    }
+    map.set(num, num)
+  }
+  return []
+}
+console.log(twoSumInt([2, 7, 11, 15], 26))
