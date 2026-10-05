@@ -148,3 +148,44 @@ const frequencyString = (word: string): Map<string, number> => {
 }
 
 console.log(frequencyString('banana'))
+
+/* 
+ Valid Anagram Problem - An anagram means both strings contain exactly the same characters with exactly the same frequencies.
+
+ For example:
+
+s = "anagram"
+t = "nagaram"
+
+They are anagrams.
+
+Why?
+
+Their frequencies are identical:
+
+ Given two strings s and t, determine whether t is an anagram of s.
+*/
+
+const validAnagram = (word1: string, word2: string): boolean => {
+  let map = new Map<string, number>()
+
+  for (const letter of word1) {
+    map.set(letter, (map.get(letter) ?? 0) + 1)
+  }
+
+  for (const char of word2) {
+    const count = map.get(char)
+
+    if (count === undefined) return false
+
+    if (count === 1) {
+      map.delete(char)
+    } else {
+      map.set(char, map.get(char)! - 1)
+    }
+  }
+
+  return map.size === 0
+}
+
+console.log(validAnagram('anagram', 'nagaram'))
