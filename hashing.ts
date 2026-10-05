@@ -130,3 +130,21 @@ const frequencyFind = (nums: number[]): Map<number, number> => {
 }
 
 console.log(frequencyFind([1, 2, 2, 3, 1, 1]))
+
+/*
+Frequency counting with strings
+
+Frequency counting with strings works because strings are iterable
+*/
+
+const frequencyString = (word: string): Map<string, number> => {
+  let map = new Map<string, number>()
+
+  for (const letter of word) {
+    map.set(letter, (map.get(letter) ?? 0) + 1)
+  }
+
+  return map
+}
+
+console.log(frequencyString('banana'))
