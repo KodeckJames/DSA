@@ -17,6 +17,27 @@ const countNums = (nums: number[]) => {
 
 console.log(countNums(ArrayNums))
 
+/*
+Count numbers - More explicit solution without the seek.set(num, (seek.get(num) ?? 0) + 1) one liner
+Given an array, count how many times each number appears.
+*/
+
+const countNumsExplicit = (nums: number[]): Map<number, number> => {
+  const map = new Map<number, number>()
+
+  for (const num of nums) {
+    if (map.has(num)) {
+      const currentCount = map.get(num)
+      map.set(num, currentCount! + 1)
+    } else {
+      map.set(num, 1)
+    }
+  }
+  return map
+}
+
+console.log(countNumsExplicit(ArrayNums))
+
 // Two Sum problem - Returning indices
 /*
 You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
@@ -94,3 +115,18 @@ console.log(removeDuplicates([1, 2, 2, 3, 3, 4]))
 
 // Shorter version:
 const removeDuplicatesShort = (nums: number[]): Set<number> => new Set(nums)
+
+console.log(removeDuplicatesShort([1, 2, 2, 3, 3, 4]))
+
+// Finding frequency
+const frequencyFind = (nums: number[]): Map<number, number> => {
+  let map = new Map<number, number>()
+
+  for (const num of nums) {
+    map.set(num, (map.get(num) ?? 0) + 1)
+  }
+
+  return map
+}
+
+console.log(frequencyFind([1, 2, 2, 3, 1, 1]))
