@@ -189,3 +189,21 @@ const validAnagram = (word1: string, word2: string): boolean => {
 }
 
 console.log(validAnagram('anagram', 'nagaram'))
+
+// Find the first character that appears only once.
+
+const appearsOnce = (word: string): number => {
+  let map = new Map<string, number>()
+
+  for (const char of word) {
+    map.set(char, map.get(char ?? 0)! + 1)
+  }
+
+  for (let i = 0; i < word.length; i++) {
+    if (map.get(word[i]) === 1) {
+      return i
+    }
+  }
+
+  return -1
+}
