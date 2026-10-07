@@ -313,3 +313,44 @@ const twoSum2 = (nums: number[], target: number): number[] => {
 }
 
 console.log(twoSum([2, 7, 8, 5, 6], 14))
+
+// Fist Occurrence - Where did we first see a number in an array?
+// You actually don't need a Map at all:
+function firstOccurrenceOptimal(nums: number[], target: number): number {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === target) {
+      return i
+    }
+  }
+
+  return -1
+}
+
+// Unnecessary solution 2
+const firstOccurrence = (nums: number[], target: number): number => {
+  const map = new Map<number, number>()
+
+  for (let i = 0; i < nums.length; i++) {
+    map.set(nums[i], i)
+    if (map.has(target)) {
+      return map.get(target)!
+    }
+  }
+
+  return -1
+}
+
+console.log(firstOccurrence([1, 2, 2, 3, 4, 2, 5, 5, 6], 5))
+
+// Interesting solution that you can use elsewhere:
+function firstOccurrenceNot(nums: number[], target: number): number {
+  const indexMap = new Map<number, number>()
+
+  for (let i = 0; i < nums.length; i++) {
+    if (!indexMap.has(nums[i])) {
+      indexMap.set(nums[i], i)
+    }
+  }
+
+  return indexMap.get(target) ?? -1
+}
