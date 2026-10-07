@@ -354,3 +354,53 @@ function firstOccurrenceNot(nums: number[], target: number): number {
 
   return indexMap.get(target) ?? -1
 }
+
+// Grouping - The key idea is using a HashMap to collect related items together.
+
+// Problem - Given an array of words, group words with their first letter
+
+const groupWords = (words: string[]): Map<string, string[]> => {
+  let map = new Map<string, string[]>()
+
+  for (const word of words) {
+    const letter = word[0]
+    if (!map.has(letter)) {
+      map.set(letter, [])
+    }
+
+    map.get(letter)!.push(word)
+  }
+
+  return map
+}
+
+console.log(
+  groupWords([
+    'apple',
+    'shell',
+    'banana',
+    'archaic',
+    'cow',
+    'shield',
+    'ajar',
+    'bus',
+  ])
+)
+
+// Grouping by number:
+
+const groupByNumber = (nums: number[]): Map<number, number[]> => {
+  let map = new Map<number, number[]>()
+
+  for (const num of nums) {
+    if (!map.has(num)) {
+      map.set(num, [])
+    }
+
+    map.get(num)!.push(num)
+  }
+
+  return map
+}
+
+console.log(groupByNumber([1, 1, 1, 2, 3, 4, 4, 2, 3, 4, 1, 5]))
