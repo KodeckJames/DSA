@@ -274,3 +274,42 @@ const returnTwiceDuplicates2 = (nums: number[]): number[] => {
 }
 
 console.log(returnTwiceDuplicates2([1, 1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7]))
+
+// Two Sum Problem:
+/*
+You are given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+Space complexity:- We're storing values and their indexes:
+value → index
+In the worst case, we store n values.
+Therefore:
+
+Space: O(n)
+
+So Two Sum using a HashMap is:
+
+Time:  O(n)
+Space: O(n)
+*/
+
+const twoSum2 = (nums: number[], target: number): number[] => {
+  let map = new Map<number, number>()
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i]
+
+    if (map.has(complement)) {
+      return [(map.get(complement), i)]
+    }
+
+    map.set(nums[i], i)
+  }
+
+  return []
+}
+
+console.log(twoSum([2, 7, 8, 5, 6], 14))
