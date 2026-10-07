@@ -404,3 +404,55 @@ const groupByNumber = (nums: number[]): Map<number, number[]> => {
 }
 
 console.log(groupByNumber([1, 1, 1, 2, 3, 4, 4, 2, 3, 4, 1, 5]))
+
+/*
+Group Anagrams
+Given an array of strings, group the anagrams together.
+*/
+
+const groupAnagrams = (words: string[]): Map<string, string[]> => {
+  let map = new Map<string, string[]>()
+
+  for (const word of words) {
+    const sorted = word.split('').sort().join('')
+
+    if (!map.has(sorted)) {
+      map.set(sorted, [])
+    }
+
+    map.get(sorted)!.push(word)
+  }
+
+  return map
+}
+
+const groupAnagrams2 = (words: string[]): string[][] => {
+  const map = new Map<string, string[]>()
+
+  for (const word of words) {
+    const key = word.split('').sort().join('')
+
+    if (!map.has(key)) {
+      map.set(key, [])
+    }
+
+    map.get(key)!.push(word)
+  }
+
+  return [...map.values()]
+}
+
+const anagramWords = [
+  'eat',
+  'tea',
+  'ate',
+  'dad',
+  'dda',
+  'car',
+  'rac',
+  'arc',
+  'pump',
+]
+
+console.log(groupAnagrams(anagramWords))
+console.log(groupAnagrams2(anagramWords))
