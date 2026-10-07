@@ -84,6 +84,14 @@ Contains Duplicate
 
 Given an integer array, return true if any value appears at least twice.
 
+Space complexity - In the worst case, every number is unique:
+
+[1, 2, 3, 4, 5, ...]
+
+So the Set stores n values:
+
+O(n)
+
 Time:  O(n)
 Space: O(n)
 */
@@ -207,3 +215,62 @@ const appearsOnce = (word: string): number => {
 
   return -1
 }
+
+// Returning actual duplicate number in an array:
+const returnDuplicate = (nums: number[]): number[] => {
+  let set = new Set<number>()
+
+  let duplicateNums = new Set<number>()
+
+  for (const num of nums) {
+    if (set.has(num)) {
+      duplicateNums.add(num)
+    }
+    set.add(num)
+  }
+
+  return [...duplicateNums]
+}
+console.log(returnDuplicate([4, 3, 2, 7, 8, 2, 3, 1]))
+
+// Returning all numbers occurring more than twice in an array:
+
+const returnTwiceDuplicates = (nums: number[]): number[] => {
+  let map = new Map<number, number>()
+
+  let numArray = new Set<number>()
+
+  for (const num of nums) {
+    map.set(num, (map.get(num) ?? 0) + 1)
+
+    if (map.get(num)! >= 2) {
+      numArray.add(num)
+    }
+  }
+
+  return [...numArray]
+}
+
+console.log(returnTwiceDuplicates([1, 1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7]))
+
+// Returning all numbers occurring more than twice in an array - Another way, though the previous one above is better
+
+const returnTwiceDuplicates2 = (nums: number[]): number[] => {
+  let map = new Map<number, number>()
+
+  let set = new Set<number>()
+
+  for (const num of nums) {
+    map.set(num, (map.get(num) ?? 0) + 1)
+  }
+
+  for (const [num, count] of map) {
+    if (count >= 2) {
+      set.add(num)
+    }
+  }
+
+  return [...set]
+}
+
+console.log(returnTwiceDuplicates2([1, 1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7]))
