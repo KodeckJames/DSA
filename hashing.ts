@@ -111,7 +111,7 @@ console.log(containsDuplicate([1, 2, 3, 1]))
 
 // Remove Duplicates
 
-const removeDuplicates = (nums: number[]): Set<number> => {
+const removeDuplicates01 = (nums: number[]): Set<number> => {
   let set = new Set<number>()
 
   for (const num of nums) {
@@ -119,7 +119,7 @@ const removeDuplicates = (nums: number[]): Set<number> => {
   }
   return set
 }
-console.log(removeDuplicates([1, 2, 2, 3, 3, 4]))
+console.log(removeDuplicates01([1, 2, 2, 3, 3, 4]))
 
 // Shorter version:
 const removeDuplicatesShort = (nums: number[]): Set<number> => new Set(nums)
@@ -456,3 +456,31 @@ const anagramWords = [
 
 console.log(groupAnagrams(anagramWords))
 console.log(groupAnagrams2(anagramWords))
+
+// *** Prefix sum + HashMap integration
+/*
+The classic problem: Subarray Sum Equals K - How many sub-arrays have a sum equal to K?
+*/
+
+const subArraySum = (nums: number[], target: number): number => {
+  let map = new Map<number, number>()
+
+  map.set(0, 1)
+
+  let count = 0
+  let sum = 0
+
+  for (const num of nums) {
+    sum += num
+    const needed = sum - target
+
+    if (map.has(needed)) {
+      count += map.get(needed)!
+    }
+
+    map.set(sum, map.get(sum) ?? 0 + 1)
+  }
+
+  return count
+}
+console.log(subArraySum([1, 2, 3], 3))
