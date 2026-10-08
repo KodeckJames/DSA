@@ -484,3 +484,53 @@ const subArraySum = (nums: number[], target: number): number => {
   return count
 }
 console.log(subArraySum([1, 2, 3], 3))
+
+// * 8.) Caching Seen States
+
+// *Fibonacci Problem - When you want it to return a finite defined number
+
+const Fibonacci = (nums: number[], limit: number) => {
+  let fibArray = [...nums]
+
+  for (let i = 2; i < limit; i++) {
+    let fibNum = fibArray[i - 1] + fibArray[i - 2]
+
+    fibArray.push(fibNum)
+  }
+
+  return fibArray
+}
+
+console.log(Fibonacci([0, 1], 5))
+
+// *Fibonacci Problem - Leetcode problem - When you are asked to use a generator and produce the subsequent numbers on demand:
+
+/* 
+ Write a generator function that returns a generator object which yields the fibonacci sequence.
+
+The fibonacci sequence is defined by the relation Xn = Xn-1 + Xn-2.
+
+The first few numbers of the series are 0, 1, 1, 2, 3, 5, 8, 13.
+*/
+
+function* FibGenerator(): Generator<number> {
+  let previous = 0
+  let current = 1
+
+  while (true) {
+    yield previous
+
+    const next = previous + current
+    previous = current
+    current = next
+  }
+}
+
+const FibResult = FibGenerator()
+
+console.log(FibResult.next())
+console.log(FibResult.next())
+console.log(FibResult.next().value)
+console.log(FibResult.next().value)
+console.log(FibResult.next().done)
+console.log(FibResult.next().done)
