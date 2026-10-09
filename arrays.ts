@@ -1,30 +1,43 @@
 // 1. Array Traversal
 
-// a.)Finding maximum
+// a.)Finding maximum value in the array
 
 let nums = [2, 9, 8, 5, 7, 39, 28, 44, 88, -3]
 
 const findMax = (nums: number[]): number => {
   let max = nums[0]
 
-  for (let i = 1; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] > max) {
       max = nums[i]
     }
   }
+
+  return max
+}
+console.log(findMax(nums))
+
+// An even better solution using Math.max()
+
+const findMaxBetter = (nums: number[]): number => {
+  let max = nums[0]
+
+  for (let i = 1; i < nums.length; i++) {
+    max = Math.max(max, nums[i])
+  }
   return max
 }
 
-console.log(findMax(nums))
+console.log(findMaxBetter(nums))
 
 // b.) Searching
 
 let searchNums = [2, 6, 4, 7]
 let find = 4
 
-const searchNum = (target: number, numsS: number[]): boolean => {
-  for (let i = 0; i < numsS.length; i++) {
-    if (numsS[i] === target) {
+const searchNum = (target: number, nums: number[]): boolean => {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === target) {
       return true
     }
   }
@@ -59,8 +72,8 @@ const hasNegative = (nums: number[]): boolean => {
   }
   return false
 }
-const hasNegativeReuelt = hasNegative(nums)
-console.log(hasNegativeReuelt)
+const hasNegativeResult = hasNegative(nums)
+console.log(hasNegativeResult)
 
 // Determine whether an array is sorted in ascending order:
 
@@ -99,19 +112,19 @@ console.log(findTarget(nums, 35))
 // O(n)
 const findTargetOptimal = (nums: number[], target: number) => {
   let left = 0
-  let fast = nums.length - 1
+  let right = nums.length - 1
 
   nums.sort((a, b) => a - b)
 
-  while (left < fast) {
-    const sum = nums[left] + nums[fast]
+  while (left < right) {
+    const sum = nums[left] + nums[right]
 
     if (sum === target) {
       return true
     } else if (sum < target) {
       left++
     } else if (sum > target) {
-      fast--
+      right--
     }
   }
   return false
